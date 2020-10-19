@@ -65,7 +65,6 @@ function createGeneratorCharts() {
 }
 
 function createDinamicCharts() {
-    /* */
     /*a = []; b = []; c = [];
     for (let i = 0; i < 50; i++) {
         var a_ = Math.random();

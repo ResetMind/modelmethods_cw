@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Модели и методы</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<header>
+    <div class="tabs_main">
+        <input type="radio" name="mrad" value="1" id="mtab_1" checked>
+        <label for="mtab_1">Оптимизация</label>
+        <input type="radio" name="mrad" value="2" id="mtab_2">
+        <label for="mtab_2">Имитационное моделирование</label>
+    </div>
+</header>
+
+<body>
+    <div class="content">
+        <div class="tabs_content1">
+            <input type="radio" name="c1rad" value="1" id="c1tab_1" checked>
+            <label for="c1tab_1">C1(l)</label>
+            <input type="radio" name="c1rad" value="2" id="c1tab_2">
+            <label for="c1tab_2">C2(l)</label>
+            <input type="radio" name="c1rad" value="3" id="c1tab_3">
+            <label for="c1tab_3">C3(l)</label>
+            <input type="radio" name="c1rad" value="4" id="c1tab_4">
+            <label for="c1tab_4">C4(l)</label>
+        </div>
+        <div class="content_c">
+            <div class="c_chart"></div>
+        </div>
+        <div class="content_c">
+            <div class="c_chart"></div>
+        </div>
+        <div class="content_c">
+            <div class="c_chart"></div>
+        </div>
+        <div class="content_c">
+            <div class="c_chart"></div>
+        </div>
+        <footer>
+            <span>Минимум: <span class="min"></span></span>
+        </footer>
+    </div>
+    <div class="content">
+        <div class="tabs_content2">
+            <input type="radio" name="c2rad" value="1" id="c2tab_1" checked>
+            <label for="c2tab_1">x(i)</label>
+            <input type="radio" name="c2rad" value="2" id="c2tab_2">
+            <label for="c2tab_2">z(i)</label>
+            <input type="radio" name="c2rad" value="3" id="c2tab_3">
+            <label for="c2tab_3">K(S)</label>
+            <input type="radio" name="c2rad" value="4" id="c2tab_4">
+            <label for="c2tab_4">C1(τ,l)</label>
+            <input type="radio" name="c2rad" value="4" id="c2tab_5">
+            <label for="c2tab_5">C2(τ,l)</label>
+            <input type="radio" name="c2rad" value="4" id="c2tab_6">
+            <label for="c2tab_6">C3(τ,l)</label>
+            <input type="radio" name="c2rad" value="4" id="c2tab_7">
+            <label for="c2tab_7">C4(τ,l)</label>
+        </div>
+        <div class="content_im">
+            <div class="im_chart"></div>
+            <footer>
+                <span>M<sub>x</sub><sup> </sup>=<span class="mx">...</span>&nbsp;&nbsp;&nbsp;
+                    σ<sub>x</sub><sup>2</sup>=<span class="sx">...</span></span>
+            </footer>
+        </div>
+        <div class="content_im">
+            <div class="im_chart"></div>
+            <footer>
+                <span>M<sub>z</sub><sup> </sup>=<span class="mz">...</span>&nbsp;&nbsp;&nbsp;
+                    σ<sub>z</sub><sup>2</sup>=<span class="sz">...</span></span>
+            </footer>
+        </div>
+        <div class="content_im">
+            <div class="im_chart"></div>
+            <footer>
+                <span>K = 4exp(–0,06dt)&nbsp;&nbsp;&nbsp; α<sub>z</sub>=<span class="az">...</span></span>
+            </footer>
+        </div>
+        <div class="content_im">
+            <div class="im_chart"></div>
+        </div>
+        <div class="content_im">
+            <div class="im_chart"></div>
+        </div>
+        <div class="content_im">
+            <div class="im_chart"></div>
+        </div>
+        <div class="content_im">
+            <div class="im_chart"></div>
+        </div>
+    </div>
+    <script src="plotly-latest.min.js"></script>
+    <script src="staticmodel.js"></script>
+    <script src="dinamicmodel.js"></script>
+    <script src="fibonacci.js"></script>
+    <script src="generator.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>

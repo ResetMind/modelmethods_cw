@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Open+Sans:wght@600&display=swap');
+
+body {
+    background: #222022;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    color: #efedef;
+    font-size: 14px;
+}
+
+header, footer {
+    z-index: 9999;
+    position: fixed;
+}
+
+footer {
+    bottom: 0px;
+}
+
+footer span {
+    line-height: 35px;
+}
+
+.content {
+    position: absolute;
+    top: 40px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    overflow: hidden;
+    display: none;
+}
+
+.content_c, .content_im {
+    position: absolute;
+    top: 40px;
+    bottom: 35px;
+    left: 5px;
+    right: 5px;
+    overflow: auto;
+    display: none;
+}
+
+.tabs_main, .tabs_content1, .tabs_content2 {
+    height: 35px;
+    width: 100%;
+    margin: 0 auto;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+
+.tabs_main>input, .tabs_content1>input, .tabs_content2>input {
+    display: none;
+}
+
+.tabs_main>label, .tabs_content1>label, .tabs_content2>label {
+    display: inline-block;
+    line-height: 35px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    vertical-align: middle;
+    color: #ceccce;
+    background: transparent;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.tabs_main>input:checked+label, .tabs_content1>input:checked+label, .tabs_content2>input:checked+label {
+    color: #f4f8f9;
+    background: #3a3a3a;
+    transition-duration: 0.3s;
+}

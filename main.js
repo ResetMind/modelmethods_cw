@@ -65,8 +65,6 @@ function createGeneratorCharts() {
 }
 
 function createDinamicCharts() {
-    data_c1_d = addToData(data_c1_d, a, b, c, null, true);
-    Plotly.newPlot(im_chart[3], data_c1_d, set3DLayout("C1(tau, l)", "l",  "tau", "C1", content_im[0]));*/
     let [l, tau, c1, c2, c3, c4] = getConcDin();
     data_c1_d = addToData(data_c1_d, l, tau, c1, null, true);
     Plotly.newPlot(im_chart[3], data_c1_d, set3DLayout("C1(tau, l)", "l",  "tau", "C1", content_im[0]));

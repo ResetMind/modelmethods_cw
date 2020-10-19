@@ -4,8 +4,10 @@ const m0 = 20;
 const sigma0 = 4;
 const alpha0 = 0.06;
 const n = 200;
-const A1 = 7.98,
-    A2 = 12.43;
+/*const A1 = 7.98,
+    A2 = 12.43;*/
+const A1 = 1,
+    A2 = 1;
 
 /*const lambda1 = Math.pow(5, 10);
 const lambda2 = Math.pow(3, 9);

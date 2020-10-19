@@ -65,18 +65,6 @@ function createGeneratorCharts() {
 }
 
 function createDinamicCharts() {
-    /*a = []; b = []; c = [];
-    for (let i = 0; i < 50; i++) {
-        var a_ = Math.random();
-        a.push(a_);
-
-        var b_ = Math.random();
-        b.push(b_);
-
-        var c_ = Math.random();
-        c.push(c_);
-    }
-
     data_c1_d = addToData(data_c1_d, a, b, c, null, true);
     Plotly.newPlot(im_chart[3], data_c1_d, set3DLayout("C1(tau, l)", "l",  "tau", "C1", content_im[0]));*/
     let [l, tau, c1, c2, c3, c4] = getConcDin();

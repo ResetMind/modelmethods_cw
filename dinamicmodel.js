@@ -1,4 +1,4 @@
-let c1_tau, T, L, k1_t, k2_t, k3_t, x = [], y = [], z1 = [], z2 = [], z3 = [], z4 = [];
+let c1_tau, T, L, k1_t, k2_t, k3_t, x = [], y = [], z4 = [], y_slice = [], z4_slice = [];
 const delta_a = 0.3, delta_b = 0.2;
 
 function getConcDin() {
@@ -17,8 +17,7 @@ function getConcDin() {
         c2 = get_c14_l();
         c3 = get_c14_l();
         c4 = get_c14_l();
-        addToMesh(get_l(alpha, beta), get_tau(alpha, beta), fromMole(c1, m1), fromMole(c2, m2), fromMole(c3, m3), fromMole(c4, m4));
-        console.log(get_l(alpha, beta) + " " + get_tau(alpha, beta));
+        addToMesh(get_l(alpha, beta), get_tau(alpha, beta), fromMole(c4, m4));
         while (alpha <= alpha_max) {
             c3_old = c3;
             c2_old = c2;
@@ -27,11 +26,11 @@ function getConcDin() {
             c3 = get_c3_din(c1_old, c2_old, c3_old);
             c2 = get_c2_din(c1_old, c2_old, c3_old);
             c1 = get_c1_din(c1_old, c2_old, c3_old);
-            addToMesh(get_l(alpha, beta), get_tau(alpha, beta), fromMole(c1, m1), fromMole(c2, m2), fromMole(c3, m3), fromMole(c4, m4));
-            console.log(get_l(alpha, beta) + " " + get_tau(alpha, beta));
+            addToMesh(get_l(alpha, beta), get_tau(alpha, beta), fromMole(c4, m4));
             alpha += delta_a;
         }
         beta += delta_b;
+        addToSlice(get_tau(alpha, beta), fromMole(c4, m4));
     }
     beta = 0;
     beta_max = (tau_max - tau_s) / 2;
@@ -42,8 +41,7 @@ function getConcDin() {
         c2 = get_c24_tau();
         c3 = get_c24_tau();
         c4 = get_c24_tau();
-        addToMesh(get_l(alpha, beta), get_tau(alpha, beta), fromMole(c1, m1), fromMole(c2, m2), fromMole(c3, m3), fromMole(c4, m4));
-        console.log(get_l(alpha, beta) + " " + get_tau(alpha, beta));
+        addToMesh(get_l(alpha, beta), get_tau(alpha, beta), fromMole(c4, m4));
         while (alpha <= alpha_max) {
             c3_old = c3;
             c2_old = c2;
@@ -52,11 +50,11 @@ function getConcDin() {
             c3 = get_c3_din(c1_old, c2_old, c3_old);
             c2 = get_c2_din(c1_old, c2_old, c3_old);
             c1 = get_c1_din(c1_old, c2_old, c3_old);
-            addToMesh(get_l(alpha, beta), get_tau(alpha, beta), fromMole(c1, m1), fromMole(c2, m2), fromMole(c3, m3), fromMole(c4, m4));
-            console.log(get_l(alpha, beta) + " " + get_tau(alpha, beta));
+            addToMesh(get_l(alpha, beta), get_tau(alpha, beta), fromMole(c4, m4));
             alpha += delta_a;
         }
-        beta += delta_b
+        beta += delta_b;
+        addToSlice(get_tau(alpha, beta), fromMole(c4, m4));
     }
     beta = (tau_max - tau_s) / 2;
     beta_max = tau_max / 2;
@@ -67,8 +65,7 @@ function getConcDin() {
         c2 = get_c24_tau();
         c3 = get_c24_tau();
         c4 = get_c24_tau();
-        addToMesh(get_l(alpha, beta), get_tau(alpha, beta), fromMole(c1, m1), fromMole(c2, m2), fromMole(c3, m3), fromMole(c4, m4));
-        console.log(get_l(alpha, beta) + " " + get_tau(alpha, beta));
+        addToMesh(get_l(alpha, beta), get_tau(alpha, beta), fromMole(c4, m4));
         while (alpha <= alpha_max) {
             c3_old = c3;
             c2_old = c2;
@@ -77,13 +74,13 @@ function getConcDin() {
             c3 = get_c3_din(c1_old, c2_old, c3_old);
             c2 = get_c2_din(c1_old, c2_old, c3_old);
             c1 = get_c1_din(c1_old, c2_old, c3_old);
-            addToMesh(get_l(alpha, beta), get_tau(alpha, beta), fromMole(c1, m1), fromMole(c2, m2), fromMole(c3, m3), fromMole(c4, m4));
-            console.log(get_l(alpha, beta) + " " + get_tau(alpha, beta));
+            addToMesh(get_l(alpha, beta), get_tau(alpha, beta), fromMole(c4, m4));
             alpha += delta_a;
         }
         beta += delta_b;
+        addToSlice(get_tau(alpha, beta), fromMole(c4, m4));
     }
-    return [x, y, z1, z2, z3, z4];
+    return [x, y, z4, y_slice, z4_slice];
 }
 
 function get_c1_din(c1_old, c2_old, c3_old) {
@@ -122,11 +119,13 @@ function get_tau(alpha, beta) {
     return alpha + beta;
 }
 
-function addToMesh(x_, y_, z1_, z2_, z3_, z4_) {
+function addToMesh(x_, y_, z4_) {
     x.push(x_);
     y.push(y_);
-    z1.push(z1_);
-    z2.push(z2_);
-    z3.push(z3_);
     z4.push(z4_);
+}
+
+function addToSlice(y_, z4_) {
+    y_slice.push(y_);
+    z4_slice.push(z4_);
 }

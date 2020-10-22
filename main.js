@@ -17,11 +17,17 @@ let span_sx = document.querySelector(".sx");
 let span_mz = document.querySelector(".mz");
 let span_sz = document.querySelector(".sz");
 let span_az = document.querySelector(".az");
+let span_ts = document.querySelector(".ts");
 const t1 = 920; //K
 const t2 = 1060;
-let data_c1_s = [], data_c2_s = [], data_c3_s = [], data_c4_s = [],
-    data_c1_d = [], data_c2_d = [], data_c3_d = [], data_c4_d = [],
-    data_xi = [], data_zi = [], data_ks = [];
+let data_c1_s = [],
+    data_c2_s = [],
+    data_c3_s = [],
+    data_c4_s = [],
+    data_c4_d = [],
+    data_xi = [],
+    data_zi = [],
+    data_c4_slice = [];
 radioOnCheck();
 createStaticCharts();
 getLTMin();
@@ -30,7 +36,7 @@ createDinamicCharts();
 
 function createStaticCharts() {
     for (let t = t1; t <= t2; t += 20) {
-        let res = getConcStat(t);
+        res = getConcStat(t);
         data_c1_s = addToData(data_c1_s, res.l, res.c1, null, t, false);
         data_c2_s = addToData(data_c2_s, res.l, res.c2, null, t, false);
         data_c3_s = addToData(data_c3_s, res.l, res.c3, null, t, false);
@@ -48,32 +54,26 @@ function getLTMin() {
 }
 
 function createGeneratorCharts() {
-    let res = generate();
+    res = generate();
     span_mx.innerHTML = res.mx;
     span_sx.innerHTML = res.sigmax;
     span_mz.innerHTML = res.mz;
     span_sz.innerHTML = res.sigmaz;
-    span_az.innerHTML = res.alphaz;
     data_xi = addToData(data_xi, [...range(0, res.xi.length)], res.xi, null, "x(i)", false);
     data_zi = addToData(data_zi, [...range(0, res.zi.length)], res.zi, null, "z(i)", false);
-    data_ks = addToData(data_ks, [...range(0, res.ks.length)], res.ks, null, "k(s)", false);
-    data_ks = addToData(data_ks, [...range(0, res.exp.length)], res.exp, null, "exp", false);
+    data_c4_slice = addToData(data_c4_slice, [...range(Math.floor(L / u), res.zi.length)], res.zi, null, "z(i) смещ. на L/u", false);
     Plotly.newPlot(im_chart[0], data_xi, set2DLayout("x(i)", "i", "x", content_im[0]), { scrollZoom: true, responsive: true });
     Plotly.newPlot(im_chart[1], data_zi, set2DLayout("z(i)", "i", "z", content_im[1]), { scrollZoom: true, responsive: true });
-    Plotly.newPlot(im_chart[2], data_ks, set2DLayout("K(S)", "S", "K", content_im[2]), { scrollZoom: true, responsive: true });
     c1_tau = res.zi;
 }
 
 function createDinamicCharts() {
-    let [l, tau, c1, c2, c3, c4] = getConcDin();
-    data_c1_d = addToData(data_c1_d, l, tau, c1, null, true);
-    Plotly.newPlot(im_chart[3], data_c1_d, set3DLayout("C1(tau, l)", "l",  "tau", "C1", content_im[0]));
-    data_c2_d = addToData(data_c2_d, l, tau, c2, null, true);
-    Plotly.newPlot(im_chart[4], data_c2_d, set3DLayout("C2(tau, l)", "l",  "tau", "C2", content_im[0]));
-    data_c3_d = addToData(data_c3_d, l, tau, c3, null, true);
-    Plotly.newPlot(im_chart[5], data_c3_d, set3DLayout("C3(tau, l)", "l",  "tau", "C3", content_im[0]));
+    let [l, tau, c4, tau_slice, c4_slice] = getConcDin();
+    data_c4_slice = addToData(data_c4_slice, tau_slice, c4_slice, null, "Срез", false);
+    Plotly.newPlot(im_chart[2], data_c4_slice, set2DLayout("Срез", "τ", "C4/z", content_im[2]), { scrollZoom: true, responsive: true });
     data_c4_d = addToData(data_c4_d, l, tau, c4, null, true);
-    Plotly.newPlot(im_chart[6], data_c4_d, set3DLayout("C4(tau, l)", "l",  "tau", "C4", content_im[0]));
+    Plotly.newPlot(im_chart[3], data_c4_d, set3DLayout("C4(τ, l)", "l", "τ", "C4", content_im[3]));
+    span_ts.innerHTML = (L / u).toFixed(6);
 }
 
 function addToData(data, x, y, z, name, mesh) {
@@ -140,7 +140,7 @@ function range(from, to, step = 1) {
 
 function radioOnCheck() {
     for (let i = 0; i < radios_main.length; i++) {
-        radios_main[i].addEventListener("change", function () {
+        radios_main[i].addEventListener("change", function() {
             content.forEach(elem => { elem.style.display = "none"; });
             content[i].style.display = "block";
             updateLayout(content_c, c_chart);
@@ -148,14 +148,14 @@ function radioOnCheck() {
         });
     }
     for (let i = 0; i < radios_cnt1.length; i++) {
-        radios_cnt1[i].addEventListener("change", function () {
+        radios_cnt1[i].addEventListener("change", function() {
             content_c.forEach(elem => { elem.style.display = "none"; });
             content_c[i].style.display = "block";
             updateLayout(content_c, c_chart);
         });
     }
     for (let i = 0; i < radios_cnt2.length; i++) {
-        radios_cnt2[i].addEventListener("change", function () {
+        radios_cnt2[i].addEventListener("change", function() {
             content_im.forEach(elem => { elem.style.display = "none"; });
             content_im[i].style.display = "block";
             updateLayout(content_im, im_chart);
@@ -163,7 +163,7 @@ function radioOnCheck() {
     }
 }
 
-window.onresize = function () {
+window.onresize = function() {
     updateLayout(content_c, c_chart);
     updateLayout(content_im, im_chart);
 }

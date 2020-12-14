@@ -42,13 +42,14 @@ function createStaticCharts() {
         data_c3_s = addToData(data_c3_s, res.l, res.c3, null, t, false);
         data_c4_s = addToData(data_c4_s, res.l, res.c4, null, t, false);
     }
-    Plotly.newPlot(c_chart[0], data_c1_s, set2DLayout("C1(l)", "l", "C1", content_c[0]), { scrollZoom: true, responsive: true });
-    Plotly.newPlot(c_chart[1], data_c2_s, set2DLayout("C2(l)", "l", "C2", content_c[1]), { scrollZoom: true, responsive: true });
-    Plotly.newPlot(c_chart[2], data_c3_s, set2DLayout("C3(l)", "l", "C3", content_c[2]), { scrollZoom: true, responsive: true });
-    Plotly.newPlot(c_chart[3], data_c4_s, set2DLayout("C4(l)", "l", "C4", content_c[3]), { scrollZoom: true, responsive: true });
+    Plotly.newPlot(c_chart[0], data_c1_s, set2DLayout("C1(l)", "l, м", "C1, %", content_c[0]), { scrollZoom: true, responsive: true });
+    Plotly.newPlot(c_chart[1], data_c2_s, set2DLayout("C2(l)", "l, м", "C2, %", content_c[1]), { scrollZoom: true, responsive: true });
+    Plotly.newPlot(c_chart[2], data_c3_s, set2DLayout("C3(l)", "l, м", "C3, %", content_c[2]), { scrollZoom: true, responsive: true });
+    Plotly.newPlot(c_chart[3], data_c4_s, set2DLayout("C4(l)", "l, м", "C4, %", content_c[3]), { scrollZoom: true, responsive: true });
 }
 
 function getLTMin() {
+    Plotly.newPlot(c_chart[0], data_c1_s, set2DLayout("f", "x", "y", content_c[0]), { scrollZoom: true, responsive: true });
     [T, L] = getMin(t1, t2);
     span_min.innerHTML = "T=" + T + " K; L=" + L + " м.";
 }
@@ -70,9 +71,9 @@ function createGeneratorCharts() {
 function createDinamicCharts() {
     let [l, tau, c4, tau_slice, c4_slice] = getConcDin();
     data_c4_slice = addToData(data_c4_slice, tau_slice, c4_slice, null, "Срез", false);
-    Plotly.newPlot(im_chart[2], data_c4_slice, set2DLayout("Срез", "τ", "C4/z", content_im[2]), { scrollZoom: true, responsive: true });
+    Plotly.newPlot(im_chart[2], data_c4_slice, set2DLayout("Срез", "τ, с", "C4/z", content_im[2]), { scrollZoom: true, responsive: true });
     data_c4_d = addToData(data_c4_d, l, tau, c4, null, true);
-    Plotly.newPlot(im_chart[3], data_c4_d, set3DLayout("C4(τ, l)", "l", "τ", "C4", content_im[3]));
+    Plotly.newPlot(im_chart[3], data_c4_d, set3DLayout("C4(τ, l)", "l, м", "τ, с", "C4", content_im[3]));
     span_ts.innerHTML = (L / u).toFixed(6);
 }
 

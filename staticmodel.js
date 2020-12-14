@@ -33,6 +33,7 @@ function getConcStat(t) {
         let c2_old = c2;
         let c1_old = c1;
         c4 = get_c4(c1_old, c2_old, c4, t);
+        //console.log(c1_old + " " + t + " " + c4);
         c3 = get_c3(c1_old, c2_old, c3_old, t);
         c2 = get_c2(c1_old, c2_old, c3_old, t);
         c1 = get_c1(c1_old, c2_old, c3_old, t);
@@ -93,4 +94,5 @@ function toMole(c, m) {
 
 function s(x) {
     return Math.pow(x, 3) - 15 * x * x + 63 * x + 12;
+    //return x * x;
 }
